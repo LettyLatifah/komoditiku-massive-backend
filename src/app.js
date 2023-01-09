@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { createServer } = require('http');
 const usersRoutes = require('./routes/users.js');
+const productRoutes = require('./routes/product.js');
 const middlrewareLogRequest = require('./middleware/logs');
 const mysql = require('mysql2');
 const upload = require('./middleware/multer.js');
@@ -16,11 +17,13 @@ app.use(bodyParser.json()).use(bodyParser.urlencoded({ extended: true }));
 // app.use(express.json());
 
 app.use(middlrewareLogRequest);
-app.use('/assets', express.static('public/images'));
-app.use('/users', usersRoutes);
 app.get('/', (req, res) => {
   res.send('Komoditiku');
 });
+app.use('/assets', express.static('public/images'));
+app.use('/users', usersRoutes);
+app.use('/product', productRoutes);
+
 app.post('/upload', upload.single('photo'), (req, res) => {
   res.json({
     message: 'Upload success',
