@@ -15,34 +15,62 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const createNewUSers = (req, res) => {
-  console.log(req.body);
-  res.json({
-    message: 'Post users success',
-    data: req.body,
-  });
+const createNewUSers = async (req, res) => {
+  const { body } = req;
+
+  if (!body.email || !body.name || !body.address) {
+    return res.status(400).json({
+      message: 'You send wrong datas!',
+      data: null,
+    });
+  }
+
+  try {
+    await UserModel.createNewUSer(body);
+    res.status(201).json({
+      message: 'create new users success',
+      data: body,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
 };
 
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
   const { idUsers } = req.params;
-  console.log('IdUSer:', idUsers);
-  res.json({
-    message: 'Update users success ',
-    data: req.body,
-  });
+  const { body } = req;
+
+  try {
+    await UserModel.updateUser(body, idUsers);
+    res.json({
+      message: 'Update users success ',
+      data: { id: idUsers, ...body },
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
 };
 
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
   const { idUsers } = req.params;
-  res.json({
-    message: 'delete berhasil',
-    data: {
-      id: idUsers,
-      name: 'letty',
-      email: 'lettylatifah15@gmail.com',
-      address: 'banyuasin',
-    },
-  });
+  try {
+    await UserModel.deleteUser(idUsers);
+    res.json({
+      message: 'delete berhasil',
+      data: null,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
 };
 
 module.exports = { getAllUsers, createNewUSers, updateUser, deleteUser };
