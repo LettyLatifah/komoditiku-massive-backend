@@ -5,6 +5,9 @@ const router = express.Router();
 //Read Product
 router.get('/', productController.getAllProduct);
 
+//read product by id
+router.get('/', productController.getProductById);
+
 //create product
 router.post('/', productController.createNewProduct);
 

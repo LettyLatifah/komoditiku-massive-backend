@@ -2,7 +2,11 @@ const db = require('../config/database');
 
 const getAllProduct = () => {
   const sqlQuery = 'SELECT * FROM product';
+  return db.execute(sqlQuery);
+};
 
+const getProductById = (idProduct) => {
+  const sqlQuery = `SELECT * FROM product WHERE id=${idProduct}`;
   return db.execute(sqlQuery);
 };
 
@@ -62,6 +66,7 @@ const deleteProduct = (idProduct) => {
 
 module.exports = {
   getAllProduct,
+  getProductById,
   createNewProduct,
   updateProduct,
   deleteProduct,

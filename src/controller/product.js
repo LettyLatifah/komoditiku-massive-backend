@@ -2,10 +2,27 @@ const productModel = require('../models/product');
 
 const getAllProduct = async (req, res) => {
   try {
-    const [data] = await productModel.getAllProduct();
+    const [data] = await productModel.getAllProduct;
     res.json({
       message: 'Get All Product Success',
       data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
+};
+
+const getProductById = async (req, res) => {
+  const { idProduct } = req.params;
+
+  try {
+    const [data] = await productModel.getProductById(idProduct);
+    res.json({
+      message: 'Get product by id Success',
+      data: { id: idProduct, data },
     });
   } catch (error) {
     res.status(500).json({
@@ -68,6 +85,7 @@ const deleteProduct = async (req, res) => {
 
 module.exports = {
   getAllProduct,
+  getProductById,
   createNewProduct,
   updateProduct,
   deleteProduct,

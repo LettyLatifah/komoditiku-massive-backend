@@ -1,35 +1,30 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const { createServer } = require('http');
+const middlrewareLogRequest = require('./middleware/logs');
 const usersRoutes = require('./routes/users.js');
 const productRoutes = require('./routes/product.js');
-const middlrewareLogRequest = require('./middleware/logs');
-const mysql = require('mysql2');
-const upload = require('./middleware/multer.js');
+const consulRoutes = require('./routes/konsultasi');
 
 // inisialisasi variabel
 const PORT = process.env.PORT || 4000;
 const app = express();
-const server = createServer(app);
 
+// body parser untuk result json
 app.use(bodyParser.json()).use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.json());
 
+//menampilkan running path pada console
 app.use(middlrewareLogRequest);
-app.get('/', (req, res) => {
+
+//memanggil api
+app.get('/', (_, res) => {
   res.send('Komoditiku');
 });
-app.use('/assets', express.static('public/images'));
 app.use('/users', usersRoutes);
 app.use('/product', productRoutes);
+app.use('/consul', consulRoutes);
 
-app.post('/upload', upload.single('photo'), (req, res) => {
-  res.json({
-    message: 'Upload success',
-  });
-});
-
+//handling error
 app.use((err, req, res, next) => {
   res.status(400).json({
     message: err.message,
