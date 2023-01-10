@@ -2,7 +2,7 @@ const productModel = require('../models/product');
 
 const getAllProduct = async (req, res) => {
   try {
-    const [data] = await productModel.getAllProduct;
+    const [data] = await productModel.getAllProduct();
     res.json({
       message: 'Get All Product Success',
       data: data,
