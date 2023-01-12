@@ -8,7 +8,7 @@ const consulRoutes = require('./routes/konsultasi');
 const articleRoutes = require('./routes/artikel');
 const courseRoutes = require('./routes/kursus_online');
 
-// inisialisasi variabel
+// inisialisasi awal variabel
 const PORT = process.env.PORT || 4000;
 const app = express();
 

@@ -23,7 +23,8 @@ const createNewProduct = (body) => {
                     jumlah_dilihat, 
                     jumlah_dihubungi, 
                     pelaku_umkm, 
-                    deskripsi_produk) 
+                    deskripsi_produk,
+                    keterangan_produk) 
   
   VALUES ('${body.nama_produk}',
           '${body.jumlah_ulasan}',
@@ -35,7 +36,8 @@ const createNewProduct = (body) => {
           '${body.jumlah_dilihat}', 
           '${body.jumlah_dihubungi}', 
           '${body.pelaku_umkm}', 
-          '${body.deskripsi_produk}')`;
+          '${body.deskripsi_produk}',
+          '${body.keterangan_produk}')`;
 
   return db.execute(sqlQuery);
 };
@@ -52,7 +54,8 @@ const updateProduct = (body, idProduct) => {
                     jumlah_dilihat ='${body.jumlah_dilihat}', 
                     jumlah_dihubungi='${body.jumlah_dihubungi}',
                     pelaku_umkm='${body.pelaku_umkm}', 
-                    deskripsi_produk='${body.deskripsi_produk}' 
+                    deskripsi_produk='${body.deskripsi_produk}',
+                    keterangan_produk='${body.keterangan_produk}'
                     WHERE id=${idProduct}
                     `;
   return db.execute(sqlQuery);
