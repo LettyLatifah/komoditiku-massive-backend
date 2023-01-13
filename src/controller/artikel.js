@@ -15,7 +15,22 @@ const getAllArticle = async (_, res) => {
   }
 };
 
-const getArticleById = () => {};
+const getArticleById = async (req, res) => {
+  const { idArticle } = req.params;
+
+  try {
+    const [data] = await articleModel.getArticleById(idArticle);
+    res.json({
+      message: 'Get product by id successs',
+      data: { id: idArticle, data },
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
+};
 
 const createNewArticle = () => {};
 

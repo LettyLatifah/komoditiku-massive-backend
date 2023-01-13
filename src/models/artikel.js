@@ -6,7 +6,11 @@ const getAllArticle = () => {
   return db.execute(sqlQuery);
 };
 
-const getArticleById = (idArticle) => {};
+const getArticleById = (idArticle) => {
+  const sqlQuery = `SELECT * FROM artikel WHERE id=${idArticle}`;
+
+  return db.execute(sqlQuery);
+};
 
 const createNewArticle = (body) => {};
 

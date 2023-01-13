@@ -3,11 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const middlrewareLogRequest = require('./middleware/logs');
 const { createServer } = require('http');
-const usersRoutes = require('./routes/users.js');
-const productRoutes = require('./routes/product.js');
-const consulRoutes = require('./routes/konsultasi');
-const articleRoutes = require('./routes/artikel');
-const courseRoutes = require('./routes/kursus_online');
 const apiRoutes = require('./routes/index');
 
 // inisialisasi awal variabel
@@ -27,11 +22,6 @@ app.get('/', (_, res) => {
 });
 
 app.use(apiRoutes);
-// app.use('/users', usersRoutes);
-// app.use('/product', productRoutes);
-// app.use('/consul', consulRoutes);
-// app.use('/article', articleRoutes);
-// app.use('/course', courseRoutes);
 
 //handling error
 app.use((err, req, res, next) => {
