@@ -1,20 +1,26 @@
 const express = require('express');
-const courseController = require('../controller/kursus_online');
-const router = express.Router();
+const routes = express();
+const {
+  getAllCourse,
+  getCourseById,
+  createNewCourse,
+  updateCourseDetail,
+  deleteCourse,
+} = require('../controller/kursus_online');
 
 //Read All Course List
-router.get('/', courseController.getAllCourse);
+routes.get('/get-course', getAllCourse);
 
 //read course by id
-router.get('/', courseController.getCourseById);
+routes.get('/get-course/idCourse', getCourseById);
 
 //create new course
-router.post('/', courseController.createNewCourse);
+routes.post('/create-course', createNewCourse);
 
 //update course detail
-router.patch('/', courseController.updateCourseDetail);
+routes.patch('/update-course', updateCourseDetail);
 
 //delete course
-router.delete('/', courseController.deleteCourse);
+routes.delete('/delete-course/idCourse', deleteCourse);
 
-module.exports = router;
+module.exports = routes;

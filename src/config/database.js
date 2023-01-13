@@ -8,4 +8,15 @@ const db = mysql.createPool({
   database: process.env.DATABASE,
 });
 
+// module.exports = {
+//   query: async (query) => {
+//     try {
+//       const [value] = await db.query(query);
+//       return value;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   },
+// };
+
 module.exports = db.promise();

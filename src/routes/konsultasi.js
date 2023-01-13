@@ -1,10 +1,14 @@
 const express = require('express');
-const consulController = require('../controller/konsultasi.js');
-const router = express.Router();
+const routes = express();
+const {
+  getAllConsulList,
+  getConsulDetailById,
+  addConsulRequest,
+} = require('../controller/konsultasi');
 
 //Read All Consultation List
-router.get('/', consulController.getAllConsulList);
-router.get('/:idConsul', consulController.getConsulDetailById);
-router.post('/', consulController.addConsulRequest);
+routes.get('/consul', getAllConsulList);
+routes.get('/consul-detail/:idConsul', getConsulDetailById);
+routes.post('/add-consul/', addConsulRequest);
 
-module.exports = router;
+module.exports = routes;

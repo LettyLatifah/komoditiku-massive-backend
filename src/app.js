@@ -2,15 +2,18 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const middlrewareLogRequest = require('./middleware/logs');
+const { createServer } = require('http');
 const usersRoutes = require('./routes/users.js');
 const productRoutes = require('./routes/product.js');
 const consulRoutes = require('./routes/konsultasi');
 const articleRoutes = require('./routes/artikel');
 const courseRoutes = require('./routes/kursus_online');
+const apiRoutes = require('./routes/index');
 
 // inisialisasi awal variabel
 const PORT = process.env.PORT || 4000;
 const app = express();
+const server = createServer(app);
 
 // body parser untuk result json
 app.use(bodyParser.json()).use(bodyParser.urlencoded({ extended: true }));
@@ -22,11 +25,13 @@ app.use(middlrewareLogRequest);
 app.get('/', (_, res) => {
   res.send('Komoditiku');
 });
-app.use('/users', usersRoutes);
-app.use('/product', productRoutes);
-app.use('/consul', consulRoutes);
-app.use('/article', articleRoutes);
-app.use('/course', courseRoutes);
+
+app.use(apiRoutes);
+// app.use('/users', usersRoutes);
+// app.use('/product', productRoutes);
+// app.use('/consul', consulRoutes);
+// app.use('/article', articleRoutes);
+// app.use('/course', courseRoutes);
 
 //handling error
 app.use((err, req, res, next) => {
@@ -35,6 +40,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server has been running in http://localhost:${PORT} `);
 });
