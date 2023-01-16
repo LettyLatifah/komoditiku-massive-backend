@@ -1,8 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const middlrewareLogRequest = require('./middleware/logs');
+const middlewareLogRequest = require('./middleware/logs');
 const { createServer } = require('http');
+const cors = require('cors');
 const apiRoutes = require('./routes/index');
 
 // inisialisasi awal variabel
@@ -14,13 +15,14 @@ const server = createServer(app);
 app.use(bodyParser.json()).use(bodyParser.urlencoded({ extended: true }));
 
 //menampilkan running path pada console
-app.use(middlrewareLogRequest);
+app.use(middlewareLogRequest);
 
 //memanggil api
 app.get('/', (_, res) => {
   res.send('Komoditiku');
 });
 
+app.use(cors());
 app.use(apiRoutes);
 
 //handling error

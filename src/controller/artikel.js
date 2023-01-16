@@ -1,8 +1,12 @@
 const articleModel = require('../models/artikel');
+const { query } = require('../config/database');
+const { getArticle } = require('../models/artikel');
 
 const getAllArticle = async (_, res) => {
   try {
     const [data] = await articleModel.getAllArticle();
+
+    // const data = await query(getArticle);
     res.json({
       message: 'Get All Article Success',
       data: data,
