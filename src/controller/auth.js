@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { query } = require('../config/database2');
-const { queryCheck } = require('../models/auth');
+const { emailCheck, registerUser, loginUser } = require('../models/auth');
 
 const validationAuth = async (req, res, next) => {
   const { email, password } = req.body;
@@ -21,9 +20,7 @@ const register = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const checkUser = await query(
-      `SELECT id FROM users WHERE email ='${email}'`
-    );
+    const [checkUser] = await emailCheck(email);
 
     if (checkUser.length !== 0)
       return res.status(400).json({ message: 'User already exist' });
@@ -31,9 +28,7 @@ const register = async (req, res) => {
     const salt = await bcrypt.genSalt(12);
     const hash = await bcrypt.hash(password, salt);
 
-    await query(
-      `INSERT INTO users (email, password) VALUES ('${email}', '${hash}');`
-    );
+    await registerUser(email, hash);
 
     return res.status(201).json({
       message: 'Register Success',
@@ -47,14 +42,15 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const [checkUser] = await query(
-      `SELECT id, email, password FROM users WHERE email = '${email}';`
-    );
+    const [checkUser] = await loginUser(email);
+
+    passwordcheck = checkUser.password;
+    // console.log(checkUser);
 
     if (checkUser === undefined)
       return res.status(400).json({ message: 'Invalid User!' });
 
-    const isMatch = await bcrypt.compare(password, checkUser.password);
+    const isMatch = await bcrypt.compare(password, checkUser[0].password);
 
     if (!isMatch)
       return res.status(400).json({ message: 'Invalid email or password!' });
