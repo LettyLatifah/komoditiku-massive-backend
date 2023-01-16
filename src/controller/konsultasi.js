@@ -1,5 +1,21 @@
 const consulModel = require('../models/konsultasi');
 
+const consulValidator = async (req, res, next) => {
+  const { idConsul } = req.params;
+  try {
+    const [data] = await consulModel.checkConsul(idConsul);
+
+    if (data.length == 0)
+      return res
+        .status(400)
+        .json({ message: 'Consultation not found', data: null });
+
+    next();
+  } catch (error) {
+    res.status(400).json({ message: 'Something went wronggg' });
+  }
+};
+
 const getAllConsulList = async (req, res) => {
   try {
     const [data] = await consulModel.getAllConsulList();
@@ -53,6 +69,7 @@ const addConsulRequest = async (req, res) => {
 };
 
 module.exports = {
+  consulValidator,
   getAllConsulList,
   getConsulDetailById,
   addConsulRequest,

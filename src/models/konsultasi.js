@@ -1,5 +1,10 @@
 const db = require('../config/database');
 
+const checkConsul = (idConsul) => {
+  const sqlQuery = `SELECT id FROM product WHERE id =${idConsul}`;
+  return db.execute(sqlQuery);
+};
+
 const getAllConsulList = () => {
   const sqlQuery = 'SELECT * FROM konsultasi';
   return db.execute(sqlQuery);
@@ -34,4 +39,9 @@ const addConsulRequest = (body) => {
   return db.execute(sqlQuery);
 };
 
-module.exports = { getAllConsulList, getConsulDetailById, addConsulRequest };
+module.exports = {
+  checkConsul,
+  getAllConsulList,
+  getConsulDetailById,
+  addConsulRequest,
+};

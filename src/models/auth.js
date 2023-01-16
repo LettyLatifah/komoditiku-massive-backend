@@ -1,7 +1,15 @@
-const queryCheck = (email) => {
-  const sqlQuery = `SELECT id FROM users WHERE email ='${email}'`;
+const db = require('../config/database');
 
-  return sqlQuery;
+const queryCheck = (emailCheck) => {
+  const sqlQuery = `SELECT id FROM users WHERE email ='${emailCheck}'`;
+
+  return db.execute(sqlQuery);
 };
 
-module.exports = { queryCheck };
+const registerUser = (email, hash) => {
+  const sqlQuery = `INSERT INTO users (email, password) VALUES ('${email}', '${hash}');`;
+
+  return db.execute(sqlQuery);
+};
+
+module.exports = { queryCheck, registerUser };

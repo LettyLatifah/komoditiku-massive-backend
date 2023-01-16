@@ -1,5 +1,19 @@
 const productModel = require('../models/product');
 
+const productValidator = async (req, res, next) => {
+  const { idProduct } = req.params;
+  try {
+    const [data] = await productModel.checkProduct(idProduct);
+
+    if (data.length == 0)
+      return res.status(400).json({ message: 'Product not found', data: null });
+
+    next();
+  } catch (error) {
+    res.status(400).json({ message: 'Something went wrong' });
+  }
+};
+
 const getAllProduct = async (_, res) => {
   try {
     const [data] = await productModel.getAllProduct();
@@ -84,6 +98,7 @@ const deleteProduct = async (req, res) => {
 };
 
 module.exports = {
+  productValidator,
   getAllProduct,
   getProductById,
   createNewProduct,
