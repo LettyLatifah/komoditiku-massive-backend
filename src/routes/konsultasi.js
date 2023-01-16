@@ -8,7 +8,7 @@ const {
 
 //Read All Consultation List
 routes.get('/consul', getAllConsulList);
-routes.get('/consul-detail/:idConsul', getConsulDetailById);
-routes.post('/add-consul/', addConsulRequest);
+routes.get('/consul/:idConsul', getConsulDetailById);
+routes.post('/consul/', addConsulRequest);
 
 module.exports = routes;

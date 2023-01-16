@@ -9,18 +9,18 @@ const {
 } = require('../controller/product');
 
 //Read Product
-routes.get('/getProduct', getAllProduct);
+routes.get('/products', getAllProduct);
 
 //read product by id
-routes.get('/getProductId/:idProduct', getProductById);
+routes.get('/products/:idProduct', getProductById);
 
 //create product
-routes.post('/create-product', createNewProduct);
+routes.post('/products', createNewProduct);
 
 //update product
-routes.patch('/update-product/:idProduct', updateProduct);
+routes.patch('/products/:idProduct', updateProduct);
 
 //delete product
-routes.delete('/delete-product/:idProduct', deleteProduct);
+routes.delete('/products/:idProduct', deleteProduct);
 
 module.exports = routes;

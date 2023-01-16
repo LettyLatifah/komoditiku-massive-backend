@@ -9,18 +9,18 @@ const {
 } = require('../controller/artikel');
 
 //Read All Article List
-routes.get('/article-list', getAllArticle);
+routes.get('/article', getAllArticle);
 
 //Read article by id
-routes.get('/article-detail/:idArticle', getArticleById);
+routes.get('/article/:idArticle', getArticleById);
 
 //create article
-routes.post('/create-article', createNewArticle);
+routes.post('/article', createNewArticle);
 
 //update article
-routes.patch('/update-article/:idArticle', updateArticle);
+routes.patch('/article/:idArticle', updateArticle);
 
 //delete article
-routes.delete('/delete-article/:idArticle', deleteArticle);
+routes.delete('/article/:idArticle', deleteArticle);
 
 module.exports = routes;

@@ -9,18 +9,18 @@ const {
 } = require('../controller/kursus_online');
 
 //Read All Course List
-routes.get('/get-course', getAllCourse);
+routes.get('/course', getAllCourse);
 
 //read course by id
-routes.get('/get-course/idCourse', getCourseById);
+routes.get('/course/idCourse', getCourseById);
 
 //create new course
-routes.post('/create-course', createNewCourse);
+routes.post('/course', createNewCourse);
 
 //update course detail
-routes.patch('/update-course', updateCourseDetail);
+routes.patch('/course', updateCourseDetail);
 
 //delete course
-routes.delete('/delete-course/idCourse', deleteCourse);
+routes.delete('/course/idCourse', deleteCourse);
 
 module.exports = routes;
