@@ -29,6 +29,21 @@ const getAllProduct = async (_, res) => {
   }
 };
 
+const getCardProduct = async (_, res) => {
+  try {
+    const [data] = await productModel.getCardProduct();
+    res.json({
+      message: 'Get All Product Success',
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
+};
+
 const getProductById = async (req, res) => {
   const { idProduct } = req.params;
 
@@ -64,14 +79,22 @@ const createCardProduct = async (req, res) => {
 };
 
 const createNewProduct = async (req, res) => {
+  // const { files, body } = req;
   const { file, body } = req;
 
+  // if (req.files === undefined)
   if (req.file === undefined)
     return res.status(400).json({ message: 'Foto product dibutuhkan!' });
 
+  // let fileName = new Array();
+  // files.map((val, undefined) => {
+  //   fileName.push(val.filename);
+  // });
+  
   const data = {
     ...body,
-    foto_produk: file.filename,
+    foto_produk: file.filename
+    // multiple: fileName
   };
   try {
     await productModel.createNewProduct(data);
@@ -124,6 +147,7 @@ const deleteProduct = async (req, res) => {
 module.exports = {
   productValidator,
   getAllProduct,
+  getCardProduct,
   getProductById,
   createCardProduct,
   createNewProduct,

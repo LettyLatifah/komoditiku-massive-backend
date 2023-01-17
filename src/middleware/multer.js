@@ -16,4 +16,5 @@ module.exports = multer({
   limits: {
     fileSize: 3 * 1000 * 1000,
   },
-}).single('productImage');
+}).single('foto_produk');
+// }).array('multiple', 2);
