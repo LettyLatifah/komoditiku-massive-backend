@@ -1,6 +1,4 @@
 const articleModel = require('../models/artikel');
-const { query } = require('../config/database');
-const { getArticle } = require('../models/artikel');
 
 const getAllArticle = async (_, res) => {
   try {
@@ -25,7 +23,7 @@ const getArticleById = async (req, res) => {
   try {
     const [data] = await articleModel.getArticleById(idArticle);
     res.json({
-      message: 'Get product by id successs',
+      message: 'Get article by id successs',
       data: { id: idArticle, data },
     });
   } catch (error) {

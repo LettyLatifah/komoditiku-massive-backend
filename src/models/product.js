@@ -16,6 +16,26 @@ const getProductById = (idProduct) => {
 };
 
 //${body.foto_produk},
+const createCardProduct = (body) => {
+  const sqlQuery = `INSERT INTO product 
+                    (nama_produk, 
+                    jumlah_ulasan, 
+                    harga, 
+                    kategori,  
+                    pelaku_umkm, 
+                    asal_produk) 
+  
+  VALUES ('${body.nama_produk}',
+          '${body.jumlah_ulasan}',
+          '${body.harga}', 
+          '${body.kategori}', 
+          '${body.pelaku_umkm}', 
+          '${body.asal_produk}')`;
+
+  return db.execute(sqlQuery);
+};
+
+//${body.foto_produk},
 const createNewProduct = (body) => {
   const sqlQuery = `INSERT INTO product 
                     (nama_produk, 
@@ -28,6 +48,7 @@ const createNewProduct = (body) => {
                     jumlah_dilihat, 
                     jumlah_dihubungi, 
                     pelaku_umkm, 
+                    asal_produk,
                     deskripsi_produk,
                     keterangan_produk) 
   
@@ -41,6 +62,7 @@ const createNewProduct = (body) => {
           '${body.jumlah_dilihat}', 
           '${body.jumlah_dihubungi}', 
           '${body.pelaku_umkm}', 
+          '${body.asal_produk}',
           '${body.deskripsi_produk}',
           '${body.keterangan_produk}')`;
 
@@ -59,6 +81,7 @@ const updateProduct = (body, idProduct) => {
                     jumlah_dilihat ='${body.jumlah_dilihat}', 
                     jumlah_dihubungi='${body.jumlah_dihubungi}',
                     pelaku_umkm='${body.pelaku_umkm}', 
+                    asal_produk='${body.asal_produk}',
                     deskripsi_produk='${body.deskripsi_produk}',
                     keterangan_produk='${body.keterangan_produk}'
                     WHERE id=${idProduct}
@@ -76,6 +99,7 @@ module.exports = {
   checkProduct,
   getAllProduct,
   getProductById,
+  createCardProduct,
   createNewProduct,
   updateProduct,
   deleteProduct,
