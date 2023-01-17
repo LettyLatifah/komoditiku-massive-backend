@@ -10,6 +10,8 @@ const {
   deleteProduct,
 } = require('../controller/product');
 
+const multer = require('../middleware/multer');
+
 //Read Product
 routes.get('/products', getAllProduct);
 
@@ -20,7 +22,7 @@ routes.get('/products/:idProduct', [productValidator, getProductById]);
 routes.post('/products-card', createCardProduct);
 
 //create product
-routes.post('/products', createNewProduct);
+routes.post('/products', multer, createNewProduct);
 
 //update product
 routes.patch('/products/:idProduct', [productValidator, updateProduct]);

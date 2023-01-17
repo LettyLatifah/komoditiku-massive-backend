@@ -64,13 +64,20 @@ const createCardProduct = async (req, res) => {
 };
 
 const createNewProduct = async (req, res) => {
-  const { body } = req;
+  const { file, body } = req;
 
+  if (req.file === undefined)
+    return res.status(400).json({ message: 'Foto product dibutuhkan!' });
+
+  const data = {
+    ...body,
+    foto_produk: file.filename,
+  };
   try {
-    await productModel.createNewProduct(body);
-    res.status(201).json({
+    await productModel.createNewProduct(data);
+    return res.status(201).json({
       message: 'Add New Product Success',
-      data: body,
+      data,
     });
   } catch (error) {
     res.status(500).json({

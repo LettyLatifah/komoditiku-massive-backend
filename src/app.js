@@ -11,6 +11,8 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 const server = createServer(app);
 
+app.use(express.static('public'));
+
 // body parser untuk result json
 app.use(bodyParser.json()).use(bodyParser.urlencoded({ extended: true }));
 

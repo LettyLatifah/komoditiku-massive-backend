@@ -39,6 +39,7 @@ const createCardProduct = (body) => {
 const createNewProduct = (body) => {
   const sqlQuery = `INSERT INTO product 
                     (nama_produk, 
+                    foto_produk,
                     jumlah_ulasan, 
                     harga, 
                     kategori, 
@@ -53,6 +54,7 @@ const createNewProduct = (body) => {
                     keterangan_produk) 
   
   VALUES ('${body.nama_produk}',
+          '${body.foto_produk}',
           '${body.jumlah_ulasan}',
           '${body.harga}', 
           '${body.kategori}', 
