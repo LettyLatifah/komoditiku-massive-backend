@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = express();
 const {
+  articleValidator,
   getAllArticle,
   getArticleById,
   createNewArticle,
@@ -12,15 +13,15 @@ const {
 routes.get('/article', getAllArticle);
 
 //Read article by id
-routes.get('/article/:idArticle', getArticleById);
+routes.get('/article/:idArticle', [articleValidator, getArticleById]);
 
 //create article
 routes.post('/article', createNewArticle);
 
 //update article
-routes.patch('/article/:idArticle', updateArticle);
+routes.patch('/article/:idArticle', [articleValidator, updateArticle]);
 
 //delete article
-routes.delete('/article/:idArticle', deleteArticle);
+routes.delete('/article/:idArticle', [articleValidator, deleteArticle]);
 
 module.exports = routes;

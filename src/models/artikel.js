@@ -1,5 +1,11 @@
 const db = require('../config/database');
 
+const checkArticle = (idArticle) => {
+  const sqlQuery = `SELECT id FROM artikel WHERE id=${idArticle}`;
+
+  return db.execute(sqlQuery);
+};
+
 const getAllArticle = () => {
   const sqlQuery = 'SELECT * FROM artikel';
 
@@ -25,6 +31,7 @@ const updateArticle = () => {};
 const deleteArticle = () => {};
 
 module.exports = {
+  checkArticle,
   getAllArticle,
   getArticle,
   getArticleById,

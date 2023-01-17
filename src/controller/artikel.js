@@ -1,5 +1,20 @@
 const articleModel = require('../models/artikel');
 
+const articleValidator = async (req, res, next) => {
+  const { idArticle } = req.params;
+
+  try {
+    const [data] = await articleModel.checkArticle(idArticle);
+
+    if (data.length == 0)
+      return res.status(400).json({ message: 'Article not found', data: null });
+
+    next();
+  } catch (error) {
+    res.status(400).json({ message: 'Something went wrong' });
+  }
+};
+
 const getAllArticle = async (_, res) => {
   try {
     const [data] = await articleModel.getAllArticle();
@@ -41,6 +56,7 @@ const updateArticle = () => {};
 const deleteArticle = () => {};
 
 module.exports = {
+  articleValidator,
   getAllArticle,
   getArticleById,
   createNewArticle,
