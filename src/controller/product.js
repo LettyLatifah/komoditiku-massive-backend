@@ -36,7 +36,7 @@ const getProductById = async (req, res) => {
     const [data] = await productModel.getProductById(idProduct);
     res.json({
       message: 'Get product by id Success',
-      data: { id: idProduct, data },
+      data: data[0],
     });
   } catch (error) {
     res.status(500).json({
