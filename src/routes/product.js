@@ -26,7 +26,7 @@ routes.get('/products/:idProduct', [productValidator, getProductById]);
 routes.post('/products', multer, createNewProduct);
 
 //update product
-routes.patch('/products/:idProduct', [productValidator, updateProduct]);
+routes.patch('/products/:idProduct', multer, [productValidator, updateProduct]);
 
 //delete product
 routes.delete('/products/:idProduct', [productValidator, deleteProduct]);

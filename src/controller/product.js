@@ -97,12 +97,21 @@ const createNewProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   const { idProduct } = req.params;
-  const { body } = req;
+  const { file, body } = req;
+
+  if (req.file === undefined)
+    return res.status(400).json({ message: 'Foto product dibutuhkan!' });
+
+  const data = {
+    ...body,
+    foto_produk: file.filename,
+  };
+
   try {
-    await productModel.updateProduct(body, idProduct);
+    await productModel.updateProduct(data, idProduct);
     res.json({
       message: 'Update Product Success',
-      data: { id: idProduct, ...body },
+      data: data,
     });
   } catch (error) {
     res.status(500).json({

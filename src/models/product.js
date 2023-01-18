@@ -74,6 +74,7 @@ const createNewProduct = (body) => {
 const updateProduct = (body, idProduct) => {
   const sqlQuery = `UPDATE product SET 
                     nama_produk='${body.nama_produk}',
+                    foto_produk='${body.foto_produk}',
                     jumlah_ulasan='${body.jumlah_ulasan}',
                     harga='${body.harga}',
                     kategori= '${body.kategori}',
