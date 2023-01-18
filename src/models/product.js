@@ -10,11 +10,6 @@ const getAllProduct = () => {
   return db.execute(sqlQuery);
 };
 
-const getCardProduct = () => {
-  const sqlQuery = 'SELECT * FROM card_product';
-  return db.execute(sqlQuery);
-};
-
 const getProductById = (idProduct) => {
   const sqlQuery = `SELECT * FROM product WHERE id=${idProduct}`;
   return db.execute(sqlQuery);
@@ -105,7 +100,7 @@ const deleteProduct = (idProduct) => {
 module.exports = {
   checkProduct,
   getAllProduct,
-  getCardProduct,
+
   getProductById,
   createCardProduct,
   createNewProduct,

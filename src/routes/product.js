@@ -3,7 +3,7 @@ const routes = express();
 const {
   productValidator,
   getAllProduct,
-  getCardProduct,
+
   getProductById,
   createCardProduct,
   createNewProduct,
@@ -16,13 +16,11 @@ const multer = require('../middleware/multer');
 //Read Product
 routes.get('/products', getAllProduct);
 
-routes.get('/products-card', getCardProduct);
-
 //read product by id
 routes.get('/products/:idProduct', [productValidator, getProductById]);
 
-//create card product
-routes.post('/products-card', createCardProduct);
+// //create card product
+// routes.post('/products-card', createCardProduct);
 
 //create product
 routes.post('/products', multer, createNewProduct);

@@ -29,21 +29,6 @@ const getAllProduct = async (_, res) => {
   }
 };
 
-const getCardProduct = async (_, res) => {
-  try {
-    const [data] = await productModel.getCardProduct();
-    res.json({
-      message: 'Get All Product Success',
-      data: data,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: 'Server Error',
-      serverMessage: error,
-    });
-  }
-};
-
 const getProductById = async (req, res) => {
   const { idProduct } = req.params;
 
@@ -90,10 +75,10 @@ const createNewProduct = async (req, res) => {
   // files.map((val, undefined) => {
   //   fileName.push(val.filename);
   // });
-  
+
   const data = {
     ...body,
-    foto_produk: file.filename
+    foto_produk: file.filename,
     // multiple: fileName
   };
   try {
@@ -147,7 +132,6 @@ const deleteProduct = async (req, res) => {
 module.exports = {
   productValidator,
   getAllProduct,
-  getCardProduct,
   getProductById,
   createCardProduct,
   createNewProduct,
