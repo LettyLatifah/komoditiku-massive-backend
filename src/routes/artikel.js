@@ -21,7 +21,7 @@ routes.get('/article/:idArticle', [articleValidator, getArticleById]);
 routes.post('/article', multer, createNewArticle);
 
 //update article
-routes.patch('/article/:idArticle', [articleValidator, updateArticle]);
+routes.patch('/article/:idArticle', multer,[articleValidator, updateArticle]);
 
 //delete article
 routes.delete('/article/:idArticle', [articleValidator, deleteArticle]);
