@@ -50,7 +50,7 @@ const updateArticle = (body, idArticle) => {
   penulis='${body.penulis}',
   foto_artikel='${body.foto_produk}',
   link_video= '${body.link_video}',
-  konten_artikel='${body.konten_artikel}', 
+  konten_artikel='${body.konten_artikel}' 
   WHERE id=${idArticle}
   `;
   return db.execute(sqlQuery);
