@@ -18,7 +18,7 @@ const getAllUsers = async (req, res) => {
 const createNewUSers = async (req, res) => {
   const { body } = req;
 
-  if (!body.email || !body.name || !body.address) {
+  if (!body.email || !body.name || !body.alamat || !body.password) {
     return res.status(400).json({
       message: 'You send wrong datas!',
       data: null,

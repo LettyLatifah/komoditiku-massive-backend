@@ -4,12 +4,12 @@ const jwt = require('jsonwebtoken');
 const { emailCheck, registerUser, loginUser } = require('../models/auth');
 
 const validationAuth = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
+  
   try {
-    if (email === undefined)
-      return res.status(400).json({ message: 'Email Required!' });
-    if (password === undefined)
-      return res.status(400).json({ message: 'Password Required!' });
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: 'Fields is required!' });
+    }
 
     next();
   } catch (error) {
@@ -18,20 +18,23 @@ const validationAuth = async (req, res, next) => {
 };
 
 const register = async (req, res) => {
-  const { email, password } = req.body;
+  const { body } = req;
 
   try {
-    const [checkUser] = await emailCheck(email);
+    const [checkUserEmail] = await emailCheck(body.email);
 
-    if (checkUser.length !== 0)
-      return res.status(400).json({ message: 'User already exist' });
+    if (checkUserEmail.length !== 0) {
+      return res.status(400).json({ 
+        message: 'User already exist' 
+      });
+    }
 
     const salt = await bcrypt.genSalt(12);
-    const hash = await bcrypt.hash(password, salt);
+    const hash = await bcrypt.hash(body.password, salt);
 
-    await registerUser(email, hash);
+    await registerUser(body.name, body.email, hash);
 
-    return res.status(201).json({
+    res.status(201).json({
       message: 'Register Success',
     });
   } catch (error) {
@@ -42,14 +45,16 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    return res.status(400).json({ message: "email or password can't be empty" });
+  }
+  
   try {
     const [checkUser] = await loginUser(email);
 
-    passwordcheck = checkUser.password;
-    // console.log(checkUser);
-
-    if (checkUser === undefined)
+    if (checkUser === undefined) {
       return res.status(400).json({ message: 'Invalid User!' });
+    }
 
     const isMatch = await bcrypt.compare(password, checkUser[0].password);
 
@@ -58,7 +63,7 @@ const login = async (req, res) => {
 
     const data = {
       id: checkUser.id,
-      username: checkUser.email,
+      email: checkUser.email,
     };
 
     const token = await jwt.sign(data, process.env.privateKey, {

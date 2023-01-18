@@ -1,13 +1,13 @@
 const db = require('../config/database');
 
 const emailCheck = (email) => {
-  const sqlQuery = `SELECT id FROM users WHERE email ='${email}'`;
+  const sqlQuery = `SELECT id, email FROM users WHERE email ='${email}'`;
 
   return db.execute(sqlQuery);
 };
 
-const registerUser = (email, hash) => {
-  const sqlQuery = `INSERT INTO users (email, password) VALUES ('${email}', '${hash}');`;
+const registerUser = (name, email, hash) => {
+  const sqlQuery = `INSERT INTO users (name, email, password) VALUES ('${name}', '${email}', '${hash}');`
 
   return db.execute(sqlQuery);
 };

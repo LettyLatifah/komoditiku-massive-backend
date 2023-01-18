@@ -6,8 +6,8 @@ const getAllUsers = () => {
 };
 
 const createNewUSer = (body) => {
-  const sqlQuery = `INSERT INTO users (name, email, address) 
-                    VALUES ('${body.name}', '${body.email}', '${body.address}')`;
+  const sqlQuery = `INSERT INTO users (name, email, alamat, password) 
+                    VALUES ('${body.name}', '${body.email}', '${body.alamat}', '${body.password}')`;
 
   return db.execute(sqlQuery);
 };
