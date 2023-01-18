@@ -9,6 +9,8 @@ const {
   deleteArticle,
 } = require('../controller/artikel');
 
+const multer = require('../middleware/multer');
+
 //Read All Article List
 routes.get('/article', getAllArticle);
 
@@ -16,7 +18,7 @@ routes.get('/article', getAllArticle);
 routes.get('/article/:idArticle', [articleValidator, getArticleById]);
 
 //create article
-routes.post('/article', createNewArticle);
+routes.post('/article', multer, createNewArticle);
 
 //update article
 routes.patch('/article/:idArticle', [articleValidator, updateArticle]);
