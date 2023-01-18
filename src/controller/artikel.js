@@ -85,11 +85,11 @@ const updateArticle = async (req, res) => {
 
   const data = {
     ...body,
-    foto_artikel: file.filename,
+    foto_produk: file.filename,
   };
 
   try {
-    await productModel.updateArticle(data, idArticle);
+    await articleModel.updateArticle(data, idArticle);
     res.json({
       message: 'Update Article Success',
       data: data,
@@ -106,7 +106,7 @@ const deleteArticle = async (req, res) => {
   const { idArticle } = req.params;
 
   try {
-    await productModel.deleteArticle(idArticle);
+    await articleModel.deleteArticle(idArticle);
     res.json({
       message: 'Delete Article Success',
       data: null,
