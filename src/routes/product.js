@@ -3,9 +3,7 @@ const routes = express();
 const {
   productValidator,
   getAllProduct,
-
   getProductById,
-  createCardProduct,
   createNewProduct,
   updateProduct,
   deleteProduct,
@@ -18,9 +16,6 @@ routes.get('/products', getAllProduct);
 
 //read product by id
 routes.get('/products/:idProduct', [productValidator, getProductById]);
-
-// //create card product
-// routes.post('/products-card', createCardProduct);
 
 //create product
 routes.post('/products', multer, createNewProduct);
