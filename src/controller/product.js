@@ -46,6 +46,21 @@ const getProductById = async (req, res) => {
   }
 };
 
+const getProductUmkm = async (_, res) => {
+  try {
+    const [data] = await productModel.getProductUmkm();
+    res.json({
+      message: 'Get All Product Success',
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
+};
+
 const createCardProduct = async (req, res) => {
   const { body } = req;
 
@@ -142,6 +157,7 @@ module.exports = {
   productValidator,
   getAllProduct,
   getProductById,
+  getProductUmkm,
   createCardProduct,
   createNewProduct,
   updateProduct,

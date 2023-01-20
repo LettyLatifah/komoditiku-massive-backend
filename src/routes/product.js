@@ -4,6 +4,7 @@ const {
   productValidator,
   getAllProduct,
   getProductById,
+  getProductUmkm,
   createNewProduct,
   updateProduct,
   deleteProduct,
@@ -16,6 +17,9 @@ routes.get('/products', getAllProduct);
 
 //read product by id
 routes.get('/products/:idProduct', [productValidator, getProductById]);
+
+//read product  dan pelaku umkm
+routes.get('/products-umkm/', getProductUmkm);
 
 //create product
 routes.post('/products', multer, createNewProduct);

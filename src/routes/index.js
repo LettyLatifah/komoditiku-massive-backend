@@ -9,6 +9,7 @@ const articleApi = require('./artikel');
 const consulApi = require('./konsultasi');
 const userApi = require('./users');
 const courseApi = require('./kursus_online');
+const umkmApi = require('./pelaku_umkm');
 
 const api = '/api/v1';
 app.use(api, authApi);
@@ -18,5 +19,6 @@ app.use(api, cardApi);
 app.use(api, articleApi);
 app.use(api, consulApi);
 app.use(api, courseApi);
+app.use(api, umkmApi);
 
 module.exports = app;

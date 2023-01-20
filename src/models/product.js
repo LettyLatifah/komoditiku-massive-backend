@@ -15,22 +15,23 @@ const getProductById = (idProduct) => {
   return db.execute(sqlQuery);
 };
 
-//${body.foto_produk},
-const createCardProduct = (body) => {
-  const sqlQuery = `INSERT INTO card_product 
-                    (nama_produk, 
-                    jumlah_ulasan, 
-                    harga, 
-                    kategori,  
-                    pelaku_umkm, 
-                    asal_produk) 
-  
-  VALUES ('${body.nama_produk}',
-          '${body.jumlah_ulasan}',
-          '${body.harga}', 
-          '${body.kategori}', 
-          '${body.pelaku_umkm}', 
-          '${body.asal_produk}')`;
+const getProductUmkm = () => {
+  const sqlQuery = `SELECT 
+  nama_produk, 
+  foto_produk,
+  jumlah_ulasan, 
+  harga, 
+  kategori, 
+  tanggal_publikasi, 
+  tanggal_panen, 
+  persediaan, 
+  jumlah_dilihat, 
+  jumlah_dihubungi, 
+  nama_umkm, 
+  asal_umkm,
+  foto_umkm,
+  deskripsi_produk,
+  keterangan_produk FROM product INNER JOIN pelaku_umkm ON product.id_umkm = pelaku_umkm.id_umkm;`;
 
   return db.execute(sqlQuery);
 };
@@ -101,9 +102,8 @@ const deleteProduct = (idProduct) => {
 module.exports = {
   checkProduct,
   getAllProduct,
-
   getProductById,
-  createCardProduct,
+  getProductUmkm,
   createNewProduct,
   updateProduct,
   deleteProduct,
