@@ -61,9 +61,9 @@ const createNewArticle = async (req, res) => {
   };
 
   try {
-    await cardModel.createNewArticle(data);
+    await articleModel.createNewArticle(data);
     res.status(201).json({
-      message: 'Add Card Article Success',
+      message: 'Add Article Success',
       data,
     });
   } catch (error) {
