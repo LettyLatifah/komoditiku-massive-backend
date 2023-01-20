@@ -57,9 +57,7 @@ const createNewArticle = async (req, res) => {
 
   const data = {
     ...body,
-    foto_produk: file.filename,
-    // foto_umkm: file.filename,
-    // multiple: fileName
+    foto_artikel: file.filename,
   };
 
   try {
@@ -85,7 +83,7 @@ const updateArticle = async (req, res) => {
 
   const data = {
     ...body,
-    foto_produk: file.filename,
+    foto_artikel: file.filename,
   };
 
   try {

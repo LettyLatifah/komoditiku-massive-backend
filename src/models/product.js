@@ -17,21 +17,66 @@ const getProductById = (idProduct) => {
 
 const getProductUmkm = () => {
   const sqlQuery = `SELECT 
-  nama_produk, 
-  foto_produk,
-  jumlah_ulasan, 
-  harga, 
-  kategori, 
-  tanggal_publikasi, 
-  tanggal_panen, 
-  persediaan, 
-  jumlah_dilihat, 
-  jumlah_dihubungi, 
-  nama_umkm, 
-  asal_umkm,
-  foto_umkm,
-  deskripsi_produk,
-  keterangan_produk FROM product INNER JOIN pelaku_umkm ON product.id_umkm = pelaku_umkm.id_umkm;`;
+                    nama_produk, 
+                    foto_produk,
+                    jumlah_ulasan, 
+                    harga, 
+                    kategori, 
+                    tanggal_publikasi, 
+                    tanggal_panen, 
+                    persediaan, 
+                    jumlah_dilihat, 
+                    jumlah_dihubungi, 
+                    nama_umkm, 
+                    asal_umkm,
+                    foto_umkm,
+                    deskripsi_produk,
+                    keterangan_produk 
+                    FROM product INNER JOIN pelaku_umkm ON product.id_umkm = pelaku_umkm.id_umkm;`;
+
+  return db.execute(sqlQuery);
+};
+
+const getProductMentah = () => {
+  const sqlQuery = `SELECT 
+                    nama_produk, 
+                    foto_produk,
+                    jumlah_ulasan, 
+                    harga, 
+                    kategori, 
+                    tanggal_publikasi, 
+                    tanggal_panen, 
+                    persediaan, 
+                    jumlah_dilihat, 
+                    jumlah_dihubungi, 
+                    nama_umkm, 
+                    asal_umkm,
+                    foto_umkm,
+                    deskripsi_produk,
+                    keterangan_produk 
+                    FROM product INNER JOIN pelaku_umkm ON product.id_umkm = pelaku_umkm.id_umkm WHERE keterangan_produk="Produk Mentah";`;
+
+  return db.execute(sqlQuery);
+};
+
+const getProductJadi = () => {
+  const sqlQuery = `SELECT 
+                    nama_produk, 
+                    foto_produk,
+                    jumlah_ulasan, 
+                    harga, 
+                    kategori, 
+                    tanggal_publikasi, 
+                    tanggal_panen, 
+                    persediaan, 
+                    jumlah_dilihat, 
+                    jumlah_dihubungi, 
+                    nama_umkm, 
+                    asal_umkm,
+                    foto_umkm,
+                    deskripsi_produk,
+                    keterangan_produk 
+                    FROM product INNER JOIN pelaku_umkm ON product.id_umkm = pelaku_umkm.id_umkm WHERE keterangan_produk="Produk Jadi";`;
 
   return db.execute(sqlQuery);
 };
@@ -49,8 +94,6 @@ const createNewProduct = (body) => {
                     persediaan, 
                     jumlah_dilihat, 
                     jumlah_dihubungi, 
-                    pelaku_umkm, 
-                    asal_produk,
                     deskripsi_produk,
                     keterangan_produk) 
   
@@ -64,8 +107,6 @@ const createNewProduct = (body) => {
           '${body.persediaan}', 
           '${body.jumlah_dilihat}', 
           '${body.jumlah_dihubungi}', 
-          '${body.pelaku_umkm}', 
-          '${body.asal_produk}',
           '${body.deskripsi_produk}',
           '${body.keterangan_produk}')`;
 
@@ -84,8 +125,6 @@ const updateProduct = (body, idProduct) => {
                     persediaan='${body.persediaan}', 
                     jumlah_dilihat ='${body.jumlah_dilihat}', 
                     jumlah_dihubungi='${body.jumlah_dihubungi}',
-                    pelaku_umkm='${body.pelaku_umkm}', 
-                    asal_produk='${body.asal_produk}',
                     deskripsi_produk='${body.deskripsi_produk}',
                     keterangan_produk='${body.keterangan_produk}'
                     WHERE id=${idProduct}
@@ -104,6 +143,8 @@ module.exports = {
   getAllProduct,
   getProductById,
   getProductUmkm,
+  getProductMentah,
+  getProductJadi,
   createNewProduct,
   updateProduct,
   deleteProduct,

@@ -1,7 +1,7 @@
 const db = require('../config/database');
 
 const checkUmkm = (idUmkm) => {
-  const sqlQuery = `SELECT id FROM pelaku_umkm WHERE id=${idUmkm}`;
+  const sqlQuery = `SELECT id_umkm FROM pelaku_umkm WHERE id_umkm=${idUmkm}`;
 
   return db.execute(sqlQuery);
 };
@@ -41,14 +41,14 @@ const updatePelakuUmkm = (body, idUmkm) => {
                     asal_umkm='${body.asal_umkm}',
                     email='${body.email}',
                     whatsapp='${body.whatsapp}'
-                    WHERE id=${idUmkm}
+                    WHERE id_umkm=${idUmkm}
   `;
 
   return db.execute(sqlQuery);
 };
 
 const deletePelakuUmkm = (idUmkm) => {
-  const sqlQuery = `DELETE FROM pelaku_umkm WHERE id=${idUmkm}`;
+  const sqlQuery = `DELETE FROM pelaku_umkm WHERE id_umkm=${idUmkm}`;
 
   return db.execute(sqlQuery);
 };

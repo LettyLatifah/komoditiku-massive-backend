@@ -48,7 +48,7 @@ const updateArticle = (body, idArticle) => {
   judul_artikel='${body.judul_artikel}',
   tanggal_publikasi='${body.tanggal_publikasi}',
   penulis='${body.penulis}',
-  foto_artikel='${body.foto_produk}',
+  foto_artikel='${body.foto_artikel}',
   link_video= '${body.link_video}',
   konten_artikel='${body.konten_artikel}' 
   WHERE id=${idArticle}

@@ -5,12 +5,14 @@ const {
   getAllProduct,
   getProductById,
   getProductUmkm,
+  getProductMentah,
+  getProductJadi,
   createNewProduct,
   updateProduct,
   deleteProduct,
 } = require('../controller/product');
 
-const multer = require('../middleware/multer');
+const multer = require('../middleware/multer_product');
 
 //Read Product
 routes.get('/products', getAllProduct);
@@ -20,6 +22,12 @@ routes.get('/products/:idProduct', [productValidator, getProductById]);
 
 //read product  dan pelaku umkm
 routes.get('/products-umkm/', getProductUmkm);
+
+//read produk mentah
+routes.get('/products-mentah/', getProductMentah);
+
+//read produk jadi
+routes.get('/products-jadi/', getProductJadi);
 
 //create product
 routes.post('/products', multer, createNewProduct);

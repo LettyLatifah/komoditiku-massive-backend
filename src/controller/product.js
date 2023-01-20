@@ -61,14 +61,12 @@ const getProductUmkm = async (_, res) => {
   }
 };
 
-const createCardProduct = async (req, res) => {
-  const { body } = req;
-
+const getProductMentah = async (_, res) => {
   try {
-    await productModel.createCardProduct(body);
-    res.status(201).json({
-      message: 'Add New Product Success',
-      data: body,
+    const [data] = await productModel.getProductMentah();
+    res.json({
+      message: 'Get All Product Mentah Success',
+      data: data,
     });
   } catch (error) {
     res.status(500).json({
@@ -78,6 +76,20 @@ const createCardProduct = async (req, res) => {
   }
 };
 
+const getProductJadi = async (_, res) => {
+  try {
+    const [data] = await productModel.getProductJadi();
+    res.json({
+      message: 'Get All Product Jadi Success',
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
+};
 const createNewProduct = async (req, res) => {
   // const { files, body } = req;
   const { file, body } = req;
@@ -158,7 +170,8 @@ module.exports = {
   getAllProduct,
   getProductById,
   getProductUmkm,
-  createCardProduct,
+  getProductMentah,
+  getProductJadi,
   createNewProduct,
   updateProduct,
   deleteProduct,
