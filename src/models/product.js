@@ -6,7 +6,8 @@ const checkProduct = (idProduct) => {
 };
 
 const getAllProduct = () => {
-  const sqlQuery = 'SELECT * FROM product';
+  const sqlQuery = 'SELECT * FROM product'; 
+                   
   return db.execute(sqlQuery);
 };
 
