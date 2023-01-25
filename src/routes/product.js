@@ -24,10 +24,10 @@ routes.get('/products/:idProduct', [productValidator, getProductById]);
 routes.get('/products-umkm/', getProductUmkm);
 
 //read produk mentah
-routes.get('/products-mentah/', getProductMentah);
+routes.get('/products-mentah', getProductMentah);
 
 //read produk jadi
-routes.get('/products-jadi/', getProductJadi);
+routes.get('/products-jadi', getProductJadi);
 
 //create product
 routes.post('/products', multer, createNewProduct);

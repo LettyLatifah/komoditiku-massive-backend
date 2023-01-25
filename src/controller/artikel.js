@@ -49,6 +49,22 @@ const getArticleById = async (req, res) => {
   }
 };
 
+const getWriter = async (_, res) => {
+  try {
+    const [data] = await articleModel.getWriter();
+
+    res.json({
+      message: 'Get All Article Writer Success',
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
+};
+
 const createNewArticle = async (req, res) => {
   const { file, body } = req;
 
@@ -62,6 +78,33 @@ const createNewArticle = async (req, res) => {
 
   try {
     await articleModel.createNewArticle(data);
+    res.status(201).json({
+      message: 'Add Article Success',
+      data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
+};
+
+const createNewWriter = async (req, res) => {
+  const { file, body } = req;
+
+  if (req.file === undefined)
+    return res
+      .status(400)
+      .json({ message: 'Foto Penulis Artikel dibutuhkan!' });
+
+  const data = {
+    ...body,
+    foto_artikel: file.filename,
+  };
+
+  try {
+    await articleModel.createNewWriter(data);
     res.status(201).json({
       message: 'Add Article Success',
       data,
@@ -121,7 +164,9 @@ module.exports = {
   articleValidator,
   getAllArticle,
   getArticleById,
+  getWriter,
   createNewArticle,
+  createNewWriter,
   updateArticle,
   deleteArticle,
 };

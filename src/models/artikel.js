@@ -7,15 +7,21 @@ const checkArticle = (idArticle) => {
 };
 
 const getAllArticle = () => {
-  const sqlQuery = 'SELECT * FROM artikel';
+  const sqlQuery = `SELECT judul_artikel, 
+  tanggal_publikasi, 
+  foto_artikel,
+  penulis, 
+  foto_penulis,  
+  link_video, 
+  konten_artikel FROM artikel INNER JOIN penulis_artikel ON artikel.id_penulis = penulis_artikel.id_penulis;`;
 
   return db.execute(sqlQuery);
 };
 
-const getArticle = () => {
-  const sqlQuery = 'SELECT * FROM artikel';
+const getWriter = () => {
+  const sqlQuery = 'SELECT * FROM penulis_artikel';
 
-  return sqlQuery;
+  return db.execute(sqlQuery);
 };
 
 const getArticleById = (idArticle) => {
@@ -43,6 +49,17 @@ VALUES ('${body.judul_artikel}',
   return db.execute(sqlQuery);
 };
 
+const createNewWriter = (body) => {
+  const sqlQuery = `INSERT INTO penulis_artikel 
+  (penulis,
+  foto_penulis) 
+
+  VALUES ('${body.penulis}',
+  '${body.foto_artikel}')`;
+
+  return db.execute(sqlQuery);
+};
+
 const updateArticle = (body, idArticle) => {
   const sqlQuery = `UPDATE artikel SET 
   judul_artikel='${body.judul_artikel}',
@@ -65,9 +82,10 @@ const deleteArticle = (idArtikel) => {
 module.exports = {
   checkArticle,
   getAllArticle,
-  getArticle,
+  getWriter,
   getArticleById,
   createNewArticle,
+  createNewWriter,
   updateArticle,
   deleteArticle,
 };

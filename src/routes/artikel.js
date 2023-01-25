@@ -4,7 +4,9 @@ const {
   articleValidator,
   getAllArticle,
   getArticleById,
+  getWriter,
   createNewArticle,
+  createNewWriter,
   updateArticle,
   deleteArticle,
 } = require('../controller/artikel');
@@ -16,6 +18,12 @@ routes.get('/article', getAllArticle);
 
 //Read article by id
 routes.get('/article/:idArticle', [articleValidator, getArticleById]);
+
+//Read All Article List
+routes.get('/article-writer', getWriter);
+
+//Read All Article List
+routes.post('/article-writer', multer, createNewWriter);
 
 //create article
 routes.post('/article', multer, createNewArticle);
