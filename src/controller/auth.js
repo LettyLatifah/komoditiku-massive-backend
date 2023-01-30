@@ -1,7 +1,7 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { emailCheck, registerUser, loginUser } = require('../models/auth');
+const { nameCheck, registerUser, loginUser } = require('../models/auth');
 
 const validationAuth = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -21,9 +21,9 @@ const register = async (req, res) => {
   const { body } = req;
 
   try {
-    const [checkUserEmail] = await emailCheck(body.email);
+    const [checkUserName] = await nameCheck(body.name);
 
-    if (checkUserEmail.length !== 0) {
+    if (checkUserName.length !== 0) {
       return res.status(400).json({ 
         message: 'User already exist' 
       });
@@ -52,6 +52,7 @@ const login = async (req, res) => {
   try {
     const [checkUser] = await loginUser(email);
 
+
     if (checkUser === undefined) {
       return res.status(400).json({ message: 'Invalid User!' });
     }
@@ -62,15 +63,19 @@ const login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password!' });
 
     const data = {
-      id: checkUser.id,
-      email: checkUser.email,
+      id: checkUser[0].id,
+      email: checkUser[0].email,
     };
 
     const token = await jwt.sign(data, process.env.privateKey, {
-      expiresIn: '1d',
+      expiresIn: "1d"
     });
 
-    return res.status(200).json({ Authorization: `bearer ${token}` });
+    return res.status(200).json({
+      name: checkUser[0].name,
+      Authorization: `bearer ${token}` 
+    });
+
   } catch (error) {
     res.status(400).json({ message: 'Something went wrong' });
   }

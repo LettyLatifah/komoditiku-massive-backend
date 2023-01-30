@@ -5,6 +5,11 @@ const getAllUsers = () => {
   return db.execute(sqlQuery);
 };
 
+const getUserById = (idUser) => {
+  const sqlQuery = `SELECT * FROM users WHERE id=${idUser}`;
+  return db.execute(sqlQuery);
+};
+
 const createNewUSer = (body) => {
   const sqlQuery = `INSERT INTO users (name, email, alamat, password) 
                     VALUES ('${body.name}', '${body.email}', '${body.alamat}', '${body.password}')`;
@@ -27,6 +32,7 @@ const deleteUser = (idUser) => {
 
 module.exports = {
   getAllUsers,
+  getUserById,
   createNewUSer,
   updateUser,
   deleteUser,

@@ -4,6 +4,7 @@ const router = express.Router();
 
 //Read - GET
 router.get('/', UsersController.getAllUsers);
+router.get('/:idUser', UsersController.getUserById);
 
 //Create - POST
 router.post('/', UsersController.createNewUSers);
